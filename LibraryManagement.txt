@@ -1,0 +1,62 @@
+
+CREATE DATABASE LibraryManagement;
+use LibraryManagement;
+
+-- drop table Users;
+
+-- drop table Categories;
+-- drop table BOOKS;
+-- drop table IssueBooks;
+
+
+ CREATE TABLE Users
+  (
+	  Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	  FirstName varchar(20),
+	  LastName varchar(20),	  
+	  UName varchar(20),
+	  Age int,
+	  Address1 varchar(50),
+	  PhoneNumber int(20),
+	  IsActive bit,
+	  LastLogin datetime,
+	  IsBlocked bit,
+	  Admin Boolean,
+	  Password varchar(20)	  
+  );
+  CREATE TABLE Categories
+  (
+	  Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	  Name varchar(20),
+	  Type varchar(20),	  
+	  IsActive bit	   
+  );
+  
+  CREATE TABLE BOOKS
+  (
+	  Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	  BookName varchar(50),
+	  Author varchar(20),	  
+      Publisher varchar(20),
+	  Edition int,
+	  IsTopSeller bit,
+	  Price int,
+	  IsAvailable bit,   
+	  TotalQuantity int,
+      RemainingQuantity int,
+	  CategoryId int,
+	  CONSTRAINT FK_Category FOREIGN KEY (CategoryId) REFERENCES Categories(Id)	  	  
+  );
+  
+  CREATE TABLE IssueBooks
+  (
+	  Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	  UserId int,
+	  BookId int,	  
+	  IsActive bit,
+	  IssuedOn datetime,
+	  ReturnedOn datetime,
+	  CONSTRAINT FK_Users FOREIGN KEY (UserId) REFERENCES Users(Id),
+	  CONSTRAINT FK_Books FOREIGN KEY (BookId) REFERENCES BOOKS(Id)	  
+  );
+  
